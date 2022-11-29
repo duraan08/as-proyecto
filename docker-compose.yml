@@ -1,0 +1,9 @@
+services:
+  servidor-caddy:
+    image: unai-web
+    container_name: servidor-caddy
+    ports: 
+      - 80:80
+  script:
+    image: unai-cliente
+    container_name: app_cliente

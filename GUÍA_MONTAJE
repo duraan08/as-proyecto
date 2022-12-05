@@ -1,0 +1,44 @@
+-- PROCESO DE MONTAJE Y EJECUCIÓN SIN DESCARAGAR LAS IMAGENES DE DOCKER HUB --
+
+1. (Dentro del directorio de /app)
+$ dokcer build -t unai-web .
+
+2. (Dentro del directorio de /script)
+$ docker build -t unai-cliente .
+
+3. (Modificar el archivo docker-compose.yml en las lineas donde ponga image)
+services:
+  servidor-caddy:
+    image: unai-web
+    container_name: servidor-caddy
+    ports: 
+      - 80:80
+  script:
+    image: unai-cliente
+    container_name: app_cliente
+
+
+4. (Dentro de la dirección en la que se encuetre el archivo docker-compose.yml)
+$ docker compose up
+
+
+-- PROCESO DE EJECUCIÓN DESCARGARNDO LAS IMÁGENES DE DOCKER HUB --
+1. (Descargar las imagenes de docker hub)
+$ docker pull duraan/unai-web
+$ docker pull duraan/unai-cliente
+
+2. (Descargar el archivo yml de este repositorio)
+El archivo debe ser como el siguiente:
+
+services:
+  servidor-caddy:
+    image: duraan/unai-web
+    container_name: servidor-caddy
+    ports: 
+      - 80:80
+  script:
+    image: duraan/unai-cliente
+    container_name: app_cliente
+
+3. (En la dirección donde se encuentre el archivo docker-compose.yml)
+$ docker compose up
